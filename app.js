@@ -42,6 +42,33 @@ const play = () => {
             rejouerBtn.style.display = "block"; // le bouton "rejouer" s'affiche 
         }
 
+        if(valeurInput !== randomNumber){ // si la valeur de l'Input est differente du random number
+            if(randomNumber < valeurInput + 3 && randomNumber > valeurInput -3){ // si la valeur de l'Input est à 2 points ou moins de la valeur du random number
+                body.style.backgroundImage = bgBrulant; // le bg change 
+                message.textContent = "C'est Brûlant !!!"; // le message change 
+            } else if (randomNumber < valeurInput + 6 && randomNumber > valeurInput -6){ // si la valeur de l'Input est à 5 points ou moins de la valeur du random number
+                body.style.backgroundImage = bgChaud; // le bg change 
+                message.textContent = "C'est Chaud !!!"; // le message change
+            } else if (randomNumber < valeurInput + 11 && randomNumber > valeurInput -11){ // si la valeur de l'Input est à 10 points ou moins de la valeur du random number
+                body.style.backgroundImage = bgTiede; // le bg change 
+                message.textContent = "C'est Tiède !!!"; // le message change
+            } else{ // tout le reste 
+                body.style.backgroundImage = bgFroid; // le bg change 
+                message.textContent = "C'est Froid !!!"; // le message change
+            }
+            vies--; // si la valeur de l'Input est differente du random number on enleve une vie
+            verifyLoose(); // verifier qu'on a perdu
+        }
         
     })
+
+    const verifyLoose = () =>{
+        if(vies === 0){ // si on a plus de vie 
+            body.style.backgroundImage = bgLoose; // on change le bg
+            body.style.color = '#990000'; // on change la couleur du texte en rouge
+            essayerBtn.setAttribute("disabled", ""); // on desactive le bouton "essayer"
+            message.textContent = `Vous avez perdu. La réponse était ${randomNumber}` // affichage du message
+            rejouerBtn.style.display = "block"; // apparition du bouton "rejouer"
+        }
+    }
 }
