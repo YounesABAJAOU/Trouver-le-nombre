@@ -60,6 +60,9 @@ const play = () => {
             verifyLoose(); // verifier qu'on a perdu
         }
         
+        actualiseCoeurs(vies); // appel de la fonction "actualiseCoeurs" qui prend en parametre "vies"
+
+
     })
 
     const verifyLoose = () =>{
@@ -71,4 +74,22 @@ const play = () => {
             rejouerBtn.style.display = "block"; // apparition du bouton "rejouer"
         }
     }
+
+    const actualiseCoeurs = (vies) => { //fonction "actualiseCoeurs" qui prend en parametre "vies"
+        divVies.innerHTML = ""; // on enleve tout le html a l'interieur
+        let tableauDeVies = []; // creation du tableau de vies
+        for (let i = 0; i < vies; i++) {
+            tableauDeVies.push(coeurPlein);
+        }
+        for (let i = 0; i < totalVies - vies; i++) {
+            tableauDeVies.push(coeurVide);
+        }
+        tableauDeVies.forEach(coeur =>{
+            divVies.innerHTML += coeur;
+        })
+    }
+    actualiseCoeurs(vies);
+
 }
+
+play();
