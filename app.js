@@ -40,6 +40,7 @@ const play = () => {
             body.style.backgroundImage = bgWin; // ca va changer le style du fond d'ecran 
             message.textContent = `BRAVO !!! Le nombre était bien ${randomNumber}`; // le message s'affiche 
             rejouerBtn.style.display = "block"; // le bouton "rejouer" s'affiche 
+            essayerBtn.setAttribute("disabled", ""); // on desactive le bouton "essayer" lorsqu'on a trouver le bon numero
         }
 
         if(valeurInput !== randomNumber){ // si la valeur de l'Input est differente du random number
@@ -89,6 +90,11 @@ const play = () => {
         })
     }
     actualiseCoeurs(vies);
+
+    rejouerBtn.addEventListener('click', () => { // lorsqu'on clique sur le bouton "rejouer" on lance une fonction...
+        message.style.display = 'none'; // enleve le message 
+        document.location.reload(true); // cela recharge la page 
+    })
 
 }
 
