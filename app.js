@@ -22,12 +22,13 @@ const bgBrulant = 'linear-gradient(to top, #ff0844 0%, #ffb199 100%)';
 const bgWin = 'linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%)';
 const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%)';
 
+
 // Play
 const play = () => {
-
+    let nombreSaisie = []; // je déclare un tableau vide qui stocke les saisies 
     // nombre aléatoire
     const randomNumber = Math.floor(Math.random() *101);
-    let totalVies = 6;
+    let totalVies = 0;
     let vies = totalVies;
     console.log(randomNumber);
     
@@ -59,7 +60,7 @@ const play = () => {
     formulaire.addEventListener('submit', (e) =>{
         e.preventDefault(); //empêche l'envoi du formulaire et le rechargement de la page
         const valeurInput = parseInt(input.value); // recuperation de la valeur de l'Input
-
+        
         if(valeurInput <0 || valeurInput >100) return; // si la valeur de l'Input est inferieur a 0 ou superieur a 100 alors on ne continue pas 
 
         if(valeurInput === randomNumber){ // si la valeur de l'Input est égale au random number l'utilisateur a gagné 
@@ -69,7 +70,7 @@ const play = () => {
             essayerBtn.setAttribute("disabled", ""); // on desactive le bouton "essayer" lorsqu'on a trouver le bon numero
         }
 
-        if(valeurInput !== randomNumber){ // si la valeur de l'Input est differente du random number
+        else if(valeurInput !== randomNumber && nombreSaisie.includes(valeurInput)==false){ // sinon si la valeur de l'Input est differente du random number  et que la valeur de l'Input n'est pas dans le tableau
             if(randomNumber < valeurInput + 3 && randomNumber > valeurInput -3){ // si la valeur de l'Input est à 2 points ou moins de la valeur du random number
                 body.style.backgroundImage = bgBrulant; // le bg change 
                 message.textContent = "C'est Brûlant !!!"; // le message change 
@@ -86,7 +87,12 @@ const play = () => {
             vies--; // si la valeur de l'Input est differente du random number on enleve une vie
             verifyLoose(); // verifier qu'on a perdu
         }
-        
+        // sinon il est déjà dans le tableau 
+        else{
+            alert("vous avez déjà saisie ce nombre");
+        }
+        // pour le nombre saisie dans le tableau
+        nombreSaisie.push(valeurInput);
         actualiseCoeurs(vies); // appel de la fonction "actualiseCoeurs" qui prend en parametre "vies"
 
 
