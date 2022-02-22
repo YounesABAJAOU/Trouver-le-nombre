@@ -2,7 +2,9 @@
 const divVies = document.querySelector('.vies');
 const message = document.getElementById('message');
 const formulaire = document.getElementById('inputBox');
+const difficulté = document.getElementById('inputBox1');
 const input = document.getElementById('number');
+const input1 = document.getElementById('number1');
 const essayerBtn = document.getElementById('essayerBtn');
 const rejouerBtn = document.getElementById('rejouer');
 const body = document.getElementsByTagName('body')[0];
@@ -29,37 +31,29 @@ const play = () => {
     let vies = totalVies;
     console.log(randomNumber);
     
-    difficulté()
-    function difficulté(){
-        let operation = prompt("Bienvenue dans le jeu 'Trouve le nombre' \n\n Veuillez choisir une difficulté :\n 1) Tapez 1 pour 'facile'\n 2) Tapez 2 pour 'normal'\n 3) Tapez 3 pour 'moyen'\n 4) Tapez 4 pour 'difficile'");
+    difficulté.addEventListener('submit', (e) =>{
+        e.preventDefault(); //empêche l'envoi du formulaire et le rechargement de la page
+        const valeurInput1 = parseInt(input1.value); // recuperation de la valeur de l'Input
     
-        if(operation == "1"){
+        if(valeurInput1 == "1"){
             totalVies = 8;
-            vies = totalVies;
+            vies = totalVies;    
         }
-        else if(operation == "2"){
+        if(valeurInput1 == "2"){
             totalVies = 6;
-            vies = totalVies;
+            vies = totalVies;    
         }
-        else if(operation == "3"){
+        if(valeurInput1 == "3"){
             totalVies = 5;
-            vies = totalVies;
+            vies = totalVies;    
         }
-        else if(operation == "4"){
+        if(valeurInput1 == "4"){
             totalVies = 4;
-            vies = totalVies;
+            vies = totalVies;    
         }
-        else{
-            if(confirm('Veuillez saisir une opération valide. Appuyez sur "OK" pour recommencer ou "Annuler" pour quitter')){
-                difficulté();
-            }
-        }
-    }
-
-
-
-
-
+        actualiseCoeurs(vies);
+        difficulté.style.display = "none";
+    })
 
     // actualisation à chaque essai - la logique du jeu
     formulaire.addEventListener('submit', (e) =>{
