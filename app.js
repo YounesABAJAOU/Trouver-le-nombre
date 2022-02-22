@@ -25,9 +25,41 @@ const play = () => {
 
     // nombre aléatoire
     const randomNumber = Math.floor(Math.random() *101);
-    const totalVies = 6;
+    let totalVies = 6;
     let vies = totalVies;
     console.log(randomNumber);
+    
+    difficulté()
+    function difficulté(){
+        let operation = prompt("Bienvenue dans le jeu 'Trouve le nombre' \n\n Veuillez choisir une difficulté :\n 1) Tapez 1 pour 'facile'\n 2) Tapez 2 pour 'normal'\n 3) Tapez 3 pour 'moyen'\n 4) Tapez 4 pour 'difficile'");
+    
+        if(operation == "1"){
+            totalVies = 8;
+            vies = totalVies;
+        }
+        else if(operation == "2"){
+            totalVies = 6;
+            vies = totalVies;
+        }
+        else if(operation == "3"){
+            totalVies = 5;
+            vies = totalVies;
+        }
+        else if(operation == "4"){
+            totalVies = 4;
+            vies = totalVies;
+        }
+        else{
+            if(confirm('Veuillez saisir une opération valide. Appuyez sur "OK" pour recommencer ou "Annuler" pour quitter')){
+                difficulté();
+            }
+        }
+    }
+
+
+
+
+
 
     // actualisation à chaque essai - la logique du jeu
     formulaire.addEventListener('submit', (e) =>{
@@ -92,8 +124,8 @@ const play = () => {
     actualiseCoeurs(vies);
 
     rejouerBtn.addEventListener('click', () => { // lorsqu'on clique sur le bouton "rejouer" on lance une fonction...
-        message.style.display = 'none'; // enleve le message 
-        document.location.reload(true); // cela recharge la page 
+        message.style.display = 'none'; // qui enleve le message 
+        document.location.reload(true); // qui permet de recharger la page 
     })
 
 }
