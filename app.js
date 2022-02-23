@@ -14,10 +14,12 @@ const coeurVide = '<ion-icon name="heart-outline"></ion-icon>';
 const coeurPlein = '<ion-icon name="heart"></ion-icon>';
 
 // Fond
+const bgStart = 'linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)';
 const bgFroid = 'linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%)';
 const bgTiede = 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)';
 const bgChaud = 'linear-gradient(-60deg, #ff5858 0%, #f09819 100%)';
 const bgBrulant = 'linear-gradient(to top, #ff0844 0%, #ffb199 100%)';
+
 
 const bgWin = 'linear-gradient(-225deg, #231557 0%, #44107A 29%, #FF1361 67%, #FFF800 100%)';
 const bgLoose = 'linear-gradient(60deg, #29323c 0%, #485563 100%)';
@@ -28,14 +30,15 @@ const play = () => {
     let nombreSaisie = []; // je déclare un tableau vide qui stocke les saisies 
     // nombre aléatoire
     const randomNumber = Math.floor(Math.random() *101);
-    let totalVies = 0;
+    let totalVies 
     let vies = totalVies;
     console.log(randomNumber);
-    
+    essayerBtn.setAttribute("disabled", ""); // on desactive le bouton "essayer" pour forcer l'utilisateur à selectionner un niveau de difficulté
+
     difficulté.addEventListener('submit', (e) =>{
         e.preventDefault(); //empêche l'envoi du formulaire et le rechargement de la page
         const valeurInput1 = parseInt(input1.value); // recuperation de la valeur de l'Input
-    
+        
         if(valeurInput1 == "1"){
             totalVies = 8;
             vies = totalVies;    
@@ -54,6 +57,7 @@ const play = () => {
         }
         actualiseCoeurs(vies);
         difficulté.style.display = "none";
+        essayerBtn.removeAttribute("disabled");
     })
 
     // actualisation à chaque essai - la logique du jeu
@@ -124,9 +128,21 @@ const play = () => {
     actualiseCoeurs(vies);
 
     rejouerBtn.addEventListener('click', () => { // lorsqu'on clique sur le bouton "rejouer" on lance une fonction...
-        message.style.display = 'none'; // qui enleve le message 
-        document.location.reload(true); // qui permet de recharger la page 
+        reset();
+        play();
     })
+
+    function reset(){
+        nombreSaisie = [];
+        essayerBtn.removeAttribute("disabled");
+        rejouerBtn.style.display = "none";
+        input.value ="";
+        input1.value ="";
+        body.style.backgroundImage = bgStart;
+        message.textContent = "";
+        difficulté.style.display = "block";
+    }
+
 
 }
 
